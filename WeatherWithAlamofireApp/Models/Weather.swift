@@ -5,8 +5,11 @@
 //  Created by Aleksandr Rybachev on 13.04.2022.
 //
 
+enum Link: String {
+    case weatherAPI = "https://weatherdbi.herokuapp.com/data/weather/london"
+}
 
-struct Weather {
+struct Weather: Decodable {
     let region: String?
     let currentConditions: CurrentConditions?
     let next_days: [NextDay]?
@@ -14,7 +17,7 @@ struct Weather {
     let data_source: String?
 }
 
-struct CurrentConditions {
+struct CurrentConditions: Decodable {
     let dayhour: String?
     let temp: Temp?
     let precip: String?
@@ -35,17 +38,17 @@ struct CurrentConditions {
     }
 }
 
-struct Temp {
+struct Temp: Decodable {
     let c: Int?
     let f: Int?
 }
 
-struct Wind {
+struct Wind: Decodable {
     let km: Int?
     let mile: Int?
 }
 
-struct NextDay {
+struct NextDay: Decodable {
     let day: String?
     let comment: String?
     let max_temp: Temp?
@@ -53,7 +56,7 @@ struct NextDay {
     let iconURL: String?
 }
 
-struct Author {
+struct Author: Decodable {
     let email: String?
     let auth_note: String?
 }
