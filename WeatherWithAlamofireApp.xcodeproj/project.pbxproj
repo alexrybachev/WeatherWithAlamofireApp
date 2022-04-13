@@ -15,6 +15,8 @@
 		28FEE7FA2807244D005519AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28FEE7F82807244D005519AE /* LaunchScreen.storyboard */; };
 		28FEE807280724A8005519AE /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEE806280724A8005519AE /* Weather.swift */; };
 		28FEE80A280724CC005519AE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEE809280724CC005519AE /* NetworkManager.swift */; };
+		28FEE80E280727AA005519AE /* NextDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FEE80C280727AA005519AE /* NextDayCell.swift */; };
+		28FEE80F280727AA005519AE /* NextDayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FEE80D280727AA005519AE /* NextDayCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		28FEE7FB2807244D005519AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28FEE806280724A8005519AE /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		28FEE809280724CC005519AE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		28FEE80C280727AA005519AE /* NextDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextDayCell.swift; sourceTree = "<group>"; };
+		28FEE80D280727AA005519AE /* NextDayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NextDayCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				28FEE7F12807244B005519AE /* ViewController.swift */,
+				28FEE80B28072770005519AE /* Cells */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -119,6 +124,15 @@
 				28FEE809280724CC005519AE /* NetworkManager.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		28FEE80B28072770005519AE /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				28FEE80C280727AA005519AE /* NextDayCell.swift */,
+				28FEE80D280727AA005519AE /* NextDayCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +194,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28FEE7FA2807244D005519AE /* LaunchScreen.storyboard in Resources */,
+				28FEE80F280727AA005519AE /* NextDayCell.xib in Resources */,
 				28FEE7F72807244D005519AE /* Assets.xcassets in Resources */,
 				28FEE7F52807244B005519AE /* Main.storyboard in Resources */,
 			);
@@ -193,6 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28FEE807280724A8005519AE /* Weather.swift in Sources */,
+				28FEE80E280727AA005519AE /* NextDayCell.swift in Sources */,
 				28FEE7F22807244B005519AE /* ViewController.swift in Sources */,
 				28FEE80A280724CC005519AE /* NetworkManager.swift in Sources */,
 				28FEE7EE2807244B005519AE /* AppDelegate.swift in Sources */,
@@ -360,7 +376,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -388,7 +404,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
