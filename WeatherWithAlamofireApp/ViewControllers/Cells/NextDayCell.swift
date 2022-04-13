@@ -18,8 +18,13 @@ class NextDayCell: UICollectionViewCell {
     
     // MARK: - Configure Cell   
     func configureCell(with image: String?) {
-        NetworkManager.shared.fetchImage(from: image) { image in
-            self.weatherImage.image = UIImage(data: image)
+        NetworkManager.shared.fetchImage(from: image) { result in
+            switch result {
+            case .success(let data):
+                self.weatherImage.image = UIImage(data: data)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
     

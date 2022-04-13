@@ -42,8 +42,13 @@ class ViewController: UIViewController {
     }
     
     private func fetchImage(with image: String?) {
-        NetworkManager.shared.fetchImage(from: image) { image in
-            self.currentWeatherImage.image = UIImage(data: image)
+        NetworkManager.shared.fetchImage(from: image) { result in
+            switch result {
+            case .success(let data):
+                self.currentWeatherImage.image = UIImage(data: data)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
 }
