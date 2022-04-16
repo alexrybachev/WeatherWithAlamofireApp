@@ -6,6 +6,7 @@
 //
 
 import UIKit
+//import Alamofire
 
 class ViewController: UIViewController {
     
@@ -15,7 +16,6 @@ class ViewController: UIViewController {
     @IBOutlet var currentWeatherConditionsLabel: UILabel!
     
     @IBOutlet var collectionView: UICollectionView!
-
     
     // MARK: - Private Properties
     private var weather: Weather?
@@ -23,31 +23,37 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchData(from: Link.weatherAPI.rawValue)
-        fetchImage(with: weather?.currentConditions?.iconURL)
+        alamofireFetchData(with: Link.weatherAPI.rawValue)
+        alamofireFetchImage(with: Link.weatherAPI.rawValue)
         
         collectionView.register(UINib(nibName: "NextDayCell", bundle: nil), forCellWithReuseIdentifier: "NextDayCell")
         collectionView.dataSource = self
     }
     
     // MARK: - Private Methods
-    private func fetchData(from url: String?) {
-        NetworkManager.shared.getData(from: url) { weather in
-            self.weather = weather
-            self.currentDayHourLabel.text = weather.currentConditions?.dayhour
-            self.currentWeatherConditionsLabel.text = weather.currentConditions?.currentWeather
-            
-            self.collectionView.reloadData()
+    private func alamofireFetchData(with url: String) {
+        NetworkManager.shared.fetchDataWithAlamofire(url) { result in
+            switch result {
+            case .success(let weather):
+                self.weather = weather
+                self.title = "Weather in \(weather.region)"
+                self.currentDayHourLabel.text = weather.currentConditions.dayhour
+                self.currentWeatherConditionsLabel.text = weather.currentConditions.currentWeather
+                self.collectionView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     
-    private func fetchImage(with image: String?) {
-        NetworkManager.shared.fetchImage(from: image) { result in
+    private func alamofireFetchImage(with image: String) {
+        guard let imageURL = weather?.currentConditions.iconURL else { return }
+        NetworkManager.shared.fetchImageWithAlamofire(imageURL) { result in
             switch result {
             case .success(let data):
                 self.currentWeatherImage.image = UIImage(data: data)
             case .failure(let error):
-                print(error.localizedDescription)
+                print(error)
             }
         }
     }
@@ -56,13 +62,13 @@ class ViewController: UIViewController {
 // MARK: - UICollectionViewDataSource
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        weather?.next_days?.count ?? 0
+        weather?.nextDays.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NextDayCell", for: indexPath) as? NextDayCell else { return UICollectionViewCell() }
-        cell.configureCell(with: weather?.next_days?[indexPath.item].iconURL)
-        cell.configureCell(with: weather?.next_days?[indexPath.item])
+        cell.configureCell(with: weather?.nextDays[indexPath.item].iconURL)
+        cell.configureCell(with: weather?.nextDays[indexPath.item])
         return cell
     }
 }

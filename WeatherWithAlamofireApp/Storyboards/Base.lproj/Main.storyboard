@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Weather in London-->
+        <!--Weather in ...-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WeatherWithAlamofireApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -76,7 +76,7 @@
                             <constraint firstItem="b7e-6o-qMK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lbW-NU-JE2"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Weather in London" id="Lki-Tz-jsY"/>
+                    <navigationItem key="navigationItem" title="Weather in ..." id="Lki-Tz-jsY"/>
                     <connections>
                         <outlet property="collectionView" destination="jhb-l7-glJ" id="GKz-ne-sQ5"/>
                         <outlet property="currentDayHourLabel" destination="q7A-Bv-1xb" id="acv-oe-8n7"/>

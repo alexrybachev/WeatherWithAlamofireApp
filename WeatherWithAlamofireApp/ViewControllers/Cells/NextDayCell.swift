@@ -18,12 +18,13 @@ class NextDayCell: UICollectionViewCell {
     
     // MARK: - Configure Cell   
     func configureCell(with image: String?) {
-        NetworkManager.shared.fetchImage(from: image) { result in
+        guard let imageURL = image else { return}
+        NetworkManager.shared.fetchImageWithAlamofire(imageURL) { result in
             switch result {
             case .success(let data):
                 self.weatherImage.image = UIImage(data: data)
             case .failure(let error):
-                print(error.localizedDescription)
+                print(error)
             }
         }
     }
@@ -31,8 +32,7 @@ class NextDayCell: UICollectionViewCell {
     func configureCell(with data: NextDay?) {
         dayWeek.text = data?.day
         weatherComment.text = data?.comment
-        maxTempLabel.text = "t max: \(data?.max_temp?.c ?? 0)"
-        minTempLabel.text = "t min: \(data?.min_temp?.c ?? 0)"
+        maxTempLabel.text = "t max: \(data?.maxTemp.celsius ?? 0)°"
+        minTempLabel.text = "t min: \(data?.minTemp.celsius ?? 0)°"
     }
-
 }
