@@ -24,7 +24,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         alamofireFetchData(with: Link.weatherAPI.rawValue)
-        alamofireFetchImage(with: Link.weatherAPI.rawValue)
         
         collectionView.register(UINib(nibName: "NextDayCell", bundle: nil), forCellWithReuseIdentifier: "NextDayCell")
         collectionView.dataSource = self
@@ -39,6 +38,7 @@ class ViewController: UIViewController {
                 self.title = "Weather in \(weather.region)"
                 self.currentDayHourLabel.text = weather.currentConditions.dayhour
                 self.currentWeatherConditionsLabel.text = weather.currentConditions.currentWeather
+                self.alamofireFetchImage(with: weather.currentConditions.iconURL)
                 self.collectionView.reloadData()
             case .failure(let error):
                 print(error)
@@ -48,10 +48,12 @@ class ViewController: UIViewController {
     
     private func alamofireFetchImage(with image: String) {
         guard let imageURL = weather?.currentConditions.iconURL else { return }
+        print(imageURL)
         NetworkManager.shared.fetchImageWithAlamofire(imageURL) { result in
             switch result {
             case .success(let data):
                 self.currentWeatherImage.image = UIImage(data: data)
+                print(data)
             case .failure(let error):
                 print(error)
             }
